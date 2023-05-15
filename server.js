@@ -15,9 +15,13 @@ const novelRouter = require("./router/novelRouter");
 const chapterRouter = require("./router/chapterRouter");
 const commentRouter = require("./router/commentRouter");
 const categoryRouter = require("./router/categoryRouter");
+const historyRouter = require("./router/historyRouter");
+const chapterhistoryRouter = require("./router/chapterhistoryRouter");
+const reportRouter = require("./router/reportRouter");
+// const reportRouter = require("./router/repor")
 //#endregion
 //#region Auth
-const {checkToken} = require("./auth/authorization");
+// const {checkToken} = require("./auth/authorization");
 //#endregion
 
 
@@ -25,10 +29,13 @@ const {checkToken} = require("./auth/authorization");
 app.use(express.json())
 app.use(cors());
 app.use('/api/v1/user', userRouter);
-app.use('/api/v1/novel', checkToken, novelRouter);
-app.use("/api/v1/chapter", checkToken, chapterRouter);
-app.use("/api/v1/comment", checkToken, commentRouter);
-app.use("/api/v1/category", checkToken, categoryRouter);
+app.use('/api/v1/novel', novelRouter);
+app.use("/api/v1/chapter", chapterRouter);
+app.use("/api/v1/comment", commentRouter);
+app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/history",  historyRouter);
+app.use("/api/v1/chapterhistory", chapterhistoryRouter);
+app.use("/api/v1/report", reportRouter);
 //#endregion
 
 

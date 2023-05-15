@@ -29,6 +29,6 @@ exports.deleted = async (req, res) => {
 };
 // Addition
 exports.findByNovelId = async (req, res) => {
-    const affectedRows = await commentModel.findByNovelId(req.params.id, req.params.userId);
+    const affectedRows = await commentModel.findByNovelId(req.params.id);
     responseData(affectedRows, res, 200, 404, "Амжилттай", "Хайхад алдаа гарлаа.");
 };

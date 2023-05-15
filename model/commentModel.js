@@ -43,6 +43,7 @@ exports.create = async (comment) => {
   try {
     comment.id = shortid.generate();
     comment.dated = dateNow();
+    comment.liked = 0;
     const [result] = await conn.query("INSERT INTO comments SET ?", [comment]);
     return result;
   } catch (err) {
@@ -84,12 +85,14 @@ exports.delete = async (id) => {
 };
 // Addition
 
-exports.findByNovelId = async (id, userId) => {
+exports.findByNovelId = async (id) => {
   const conn = await db.getConnection();
   try {
     const [rows, fields] = await conn.query(
-      `SELECT c.* , u.username , u.image  FROM comments c INNER JOIN users u ON  c.novelId = ? AND u.id = ?`,
-      [id, userId]
+      `SELECT c.*, u.username FROM comments c 
+        INNER JOIN users u ON u.id = c.userId
+        WHERE c.novelId = ?`,
+      [id]
     );
     return rows;
   } catch (error) {
